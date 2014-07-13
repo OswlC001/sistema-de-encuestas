@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="OpcRespEditDlg" widgetVar="OpcRespEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.EditOpcRespTitle}" closeOnEscape="true">
+
+            <h:form id="OpcRespEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{opcRespController.selected != null}">
+
+
+                        <h:outputLabel value="#{appBundle.EditOpcRespLabel_oreCodigo}" for="oreCodigo" />
+                        <h:outputText id="oreCodigo" value="#{opcRespController.selected.oreCodigo}" />
+
+                        <p:outputLabel value="#{appBundle.EditOpcRespLabel_treCodigo}" for="treCodigo" />
+                        <p:inputText id="treCodigo" value="#{opcRespController.selected.treCodigo}" title="#{appBundle.EditOpcRespTitle_treCodigo}"/>
+
+                        <p:outputLabel value="#{appBundle.EditOpcRespLabel_oreDescri}" for="oreDescri" />
+                        <p:inputText id="oreDescri" value="#{opcRespController.selected.oreDescri}" title="#{appBundle.EditOpcRespTitle_oreDescri}" size="100" maxlength="100"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{opcRespController.save}" value="#{appBundle.Save}" update="display,:OpcRespListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,OpcRespEditDialog);">
+                        <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{appBundle.Cancel}" onclick="OpcRespEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

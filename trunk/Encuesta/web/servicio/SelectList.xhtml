@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <br/>
+    <br/>
+    <center>
+        <h:form id="ServicioSelectForm">
+            <p:panel header="Seleccione de la lista los servicios recibidos ..." style="width: 60%">  
+                <p:selectManyCheckbox value="#{respuestasController.selectedServ}" layout="grid" columns="1">  
+                    <f:selectItems value="#{servicioController.items}" var="item" itemLabel="#{item.servDeno}"/>  
+                </p:selectManyCheckbox>    
+                <p:separator/>
+                <p><p:commandButton id="btnSelect" update="ServicioSelectForm" value="Continúar" action="#{respuestasController.continuarEncuesta}"/></p>
+            </p:panel>
+        </h:form>
+    </center>
+</ui:composition>

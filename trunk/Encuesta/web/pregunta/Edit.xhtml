@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="PreguntaEditDlg" widgetVar="PreguntaEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.EditPreguntaTitle}" closeOnEscape="true">
+
+            <h:form id="PreguntaEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{preguntaController.selected != null}">
+
+
+                        <h:outputLabel value="#{appBundle.EditPreguntaLabel_preCodigo}" for="preCodigo" />
+                        <h:outputText id="preCodigo" value="#{preguntaController.selected.preCodigo}" />
+
+                        <p:outputLabel value="#{appBundle.EditPreguntaLabel_treCodigo}" for="treCodigo" />
+                        <p:inputText id="treCodigo" value="#{preguntaController.selected.treCodigo}" title="#{appBundle.EditPreguntaTitle_treCodigo}"/>
+
+                        <p:outputLabel value="#{appBundle.EditPreguntaLabel_servId}" for="servId" />
+                        <p:inputText id="servId" value="#{preguntaController.selected.servId}" title="#{appBundle.EditPreguntaTitle_servId}"/>
+
+                        <p:outputLabel value="#{appBundle.EditPreguntaLabel_encCodigo}" for="encCodigo" />
+                        <p:inputText id="encCodigo" value="#{preguntaController.selected.encCodigo}" title="#{appBundle.EditPreguntaTitle_encCodigo}"/>
+
+                        <p:outputLabel value="#{appBundle.EditPreguntaLabel_prePregunta}" for="prePregunta" />
+                        <p:inputTextarea rows="4" cols="30" id="prePregunta" value="#{preguntaController.selected.prePregunta}" title="#{appBundle.EditPreguntaTitle_prePregunta}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{preguntaController.save}" value="#{appBundle.Save}" update="display,:PreguntaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PreguntaEditDialog);">
+                        <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{appBundle.Cancel}" onclick="PreguntaEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

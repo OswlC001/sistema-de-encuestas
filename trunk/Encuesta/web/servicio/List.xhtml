@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ServicioListForm">
+
+        <p:panel header="#{appBundle.ListServicioTitle}">
+            <p:contextMenu id="ServicioDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{appBundle.Create}" onclick="document.getElementById('ServicioListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{appBundle.View}" onclick="document.getElementById('ServicioListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{appBundle.Edit}" onclick="document.getElementById('ServicioListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{appBundle.Delete}" onclick="document.getElementById('ServicioListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{servicioController.items}"
+                         var="item"
+                         rowKey="#{item.servId}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{servicioController.selected}">
+
+                <p:ajax event="rowSelect"   update=":ServicioListForm:createButton :ServicioListForm:viewButton :ServicioListForm:editButton :ServicioListForm:deleteButton :ServicioListForm:ServicioDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":ServicioListForm:createButton :ServicioListForm:viewButton :ServicioListForm:editButton :ServicioListForm:deleteButton :ServicioListForm:ServicioDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ServicioListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.servId}" filterBy="#{item.servId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListServicioTitle_servId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.servId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.servSiglas}" filterBy="#{item.servSiglas}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListServicioTitle_servSiglas}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.servSiglas}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.servDeno}" filterBy="#{item.servDeno}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListServicioTitle_servDeno}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.servDeno}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{appBundle.Create}" actionListener="#{servicioController.prepareCreate}" update=":ServicioCreateForm" oncomplete="ServicioCreateDialog.show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{appBundle.View}" update=":ServicioViewForm" oncomplete="ServicioViewDialog.show()" disabled="#{empty servicioController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{appBundle.Edit}" update=":ServicioEditForm" oncomplete="ServicioEditDialog.show()" disabled="#{empty servicioController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{appBundle.Delete}" actionListener="#{servicioController.delete}" update=":growl,datalist" disabled="#{empty servicioController.selected}">
+                <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

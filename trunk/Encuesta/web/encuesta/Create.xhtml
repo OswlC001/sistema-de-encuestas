@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EncuestaCreateDlg" widgetVar="EncuestaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{appBundle.CreateEncuestaTitle}" closeOnEscape="true">
+
+            <h:form id="EncuestaCreateForm">
+
+                <h:panelGroup id="display" rendered="#{encuestaController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{appBundle.CreateEncuestaLabel_encDescri}" for="encDescri" />
+                        <p:inputText id="encDescri" value="#{encuestaController.selected.encDescri}" title="#{appBundle.CreateEncuestaTitle_encDescri}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{appBundle.CreateEncuestaLabel_encEstado}" for="encEstado" />
+                        <p:inputText id="encEstado" value="#{encuestaController.selected.encEstado}" title="#{appBundle.CreateEncuestaTitle_encEstado}"/>
+
+                        <p:outputLabel value="#{appBundle.CreateEncuestaLabel_encFechini}" for="encFechini" />
+                        <p:calendar id="encFechini" pattern="MM/dd/yyyy HH:mm:ss" value="#{encuestaController.selected.encFechini}" title="#{appBundle.CreateEncuestaTitle_encFechini}"  showOn="button"/>
+
+                        <p:outputLabel value="#{appBundle.CreateEncuestaLabel_encFecfin}" for="encFecfin" />
+                        <p:calendar id="encFecfin" pattern="MM/dd/yyyy HH:mm:ss" value="#{encuestaController.selected.encFecfin}" title="#{appBundle.CreateEncuestaTitle_encFecfin}"  showOn="button"/>
+
+                        <p:outputLabel value="#{appBundle.CreateEncuestaLabel_encFiltXSrv}" for="encFiltXSrv" />
+                        <p:inputText id="encFiltXSrv" value="#{encuestaController.selected.encFiltXSrv}" title="#{appBundle.CreateEncuestaTitle_encFiltXSrv}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{encuestaController.saveNew}" value="#{appBundle.Save}" update="display,:EncuestaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,EncuestaCreateDialog);">
+                        <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{appBundle.Cancel}" onclick="EncuestaCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

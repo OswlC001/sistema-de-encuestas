@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RespuestasViewDlg" widgetVar="RespuestasViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.ViewRespuestasTitle}" closeOnEscape="true">
+
+            <h:form id="RespuestasViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{respuestasController.selected != null}">
+
+                        <h:outputText value="#{appBundle.ViewRespuestasLabel_resCodigo}"/>
+                        <h:outputText value="#{respuestasController.selected.resCodigo}" title="#{appBundle.ViewRespuestasTitle_resCodigo}"/>
+
+                        <h:outputText value="#{appBundle.ViewRespuestasLabel_usrId}"/>
+                        <h:outputText value="#{respuestasController.selected.usrId}" title="#{appBundle.ViewRespuestasTitle_usrId}"/>
+
+                        <h:outputText value="#{appBundle.ViewRespuestasLabel_preCodigo}"/>
+                        <h:outputText value="#{respuestasController.selected.preCodigo}" title="#{appBundle.ViewRespuestasTitle_preCodigo}"/>
+
+                        <h:outputText value="#{appBundle.ViewRespuestasLabel_oreCodigo}"/>
+                        <h:outputText value="#{respuestasController.selected.oreCodigo}" title="#{appBundle.ViewRespuestasTitle_oreCodigo}"/>
+
+                        <h:outputText value="#{appBundle.ViewRespuestasLabel_resResplibre}"/>
+                        <h:outputText value="#{respuestasController.selected.resResplibre}" title="#{appBundle.ViewRespuestasTitle_resResplibre}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{appBundle.Close}" onclick="RespuestasViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

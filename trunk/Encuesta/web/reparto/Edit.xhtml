@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="RepartoEditDlg" widgetVar="RepartoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.EditRepartoTitle}" closeOnEscape="true">
+
+            <h:form id="RepartoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{repartoController.selected != null}">
+
+
+                        <h:outputLabel value="#{appBundle.EditRepartoLabel_repaCodigo2}" for="repaCodigo2" />
+                        <h:outputText id="repaCodigo2" value="#{repartoController.selected.repaCodigo2}" />
+
+                        <p:outputLabel value="#{appBundle.EditRepartoLabel_repRepaCodigo2}" for="repRepaCodigo2" />
+                        <p:inputText id="repRepaCodigo2" value="#{repartoController.selected.repRepaCodigo2}" title="#{appBundle.EditRepartoTitle_repRepaCodigo2}" size="6" maxlength="6"/>
+
+                        <p:outputLabel value="#{appBundle.EditRepartoLabel_repaDenominacion}" for="repaDenominacion" />
+                        <p:inputText id="repaDenominacion" value="#{repartoController.selected.repaDenominacion}" title="#{appBundle.EditRepartoTitle_repaDenominacion}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{appBundle.EditRepartoLabel_repaActi}" for="repaActi" />
+                        <p:selectBooleanCheckbox id="repaActi" value="#{repartoController.selected.repaActi}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{repartoController.save}" value="#{appBundle.Save}" update="display,:RepartoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,RepartoEditDialog);">
+                        <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{appBundle.Cancel}" onclick="RepartoEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

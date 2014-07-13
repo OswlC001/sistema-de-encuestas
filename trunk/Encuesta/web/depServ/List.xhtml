@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="DepServListForm">
+
+        <p:panel header="#{appBundle.ListDepServTitle}">
+            <p:contextMenu id="DepServDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{appBundle.Create}" onclick="document.getElementById('DepServListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{appBundle.View}" onclick="document.getElementById('DepServListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{appBundle.Edit}" onclick="document.getElementById('DepServListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{appBundle.Delete}" onclick="document.getElementById('DepServListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{depServController.items}"
+                         var="item"
+                         rowKey="#{item.depServPK}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{depServController.selected}">
+
+                <p:ajax event="rowSelect"   update=":DepServListForm:createButton :DepServListForm:viewButton :DepServListForm:editButton :DepServListForm:deleteButton :DepServListForm:DepServDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":DepServListForm:createButton :DepServListForm:viewButton :DepServListForm:editButton :DepServListForm:deleteButton :DepServListForm:DepServDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('DepServListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.depServPK.servId}" filterBy="#{item.depServPK.servId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListDepServTitle_depServPK_servId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.depServPK.servId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.depServPK.depId}" filterBy="#{item.depServPK.depId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListDepServTitle_depServPK_depId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.depServPK.depId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.tipAccion}" filterBy="#{item.tipAccion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListDepServTitle_tipAccion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.tipAccion}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{appBundle.Create}" actionListener="#{depServController.prepareCreate}" update=":DepServCreateForm" oncomplete="DepServCreateDialog.show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{appBundle.View}" update=":DepServViewForm" oncomplete="DepServViewDialog.show()" disabled="#{empty depServController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{appBundle.Edit}" update=":DepServEditForm" oncomplete="DepServEditDialog.show()" disabled="#{empty depServController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{appBundle.Delete}" actionListener="#{depServController.delete}" update=":growl,datalist" disabled="#{empty depServController.selected}">
+                <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

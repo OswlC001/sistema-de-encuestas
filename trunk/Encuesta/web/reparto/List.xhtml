@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="RepartoListForm">
+
+        <p:panel header="#{appBundle.ListRepartoTitle}">
+            <p:contextMenu id="RepartoDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{appBundle.Create}" onclick="document.getElementById('RepartoListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{appBundle.View}" onclick="document.getElementById('RepartoListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{appBundle.Edit}" onclick="document.getElementById('RepartoListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{appBundle.Delete}" onclick="document.getElementById('RepartoListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{repartoController.items}"
+                         var="item"
+                         rowKey="#{item.repaCodigo2}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{repartoController.selected}">
+
+                <p:ajax event="rowSelect"   update=":RepartoListForm:createButton :RepartoListForm:viewButton :RepartoListForm:editButton :RepartoListForm:deleteButton :RepartoListForm:RepartoDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":RepartoListForm:createButton :RepartoListForm:viewButton :RepartoListForm:editButton :RepartoListForm:deleteButton :RepartoListForm:RepartoDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('RepartoListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.repaCodigo2}" filterBy="#{item.repaCodigo2}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListRepartoTitle_repaCodigo2}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.repaCodigo2}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.repRepaCodigo2}" filterBy="#{item.repRepaCodigo2}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListRepartoTitle_repRepaCodigo2}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.repRepaCodigo2}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.repaDenominacion}" filterBy="#{item.repaDenominacion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListRepartoTitle_repaDenominacion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.repaDenominacion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.repaActi}" filterBy="#{item.repaActi}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListRepartoTitle_repaActi}"/>
+                    </f:facet>
+                    <h:selectBooleanCheckbox id="repaActi" value="#{item.repaActi}" title="#{appBundle.EditRepartoTitle_repaActi}"  disabled="true"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{appBundle.Create}" actionListener="#{repartoController.prepareCreate}" update=":RepartoCreateForm" oncomplete="RepartoCreateDialog.show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{appBundle.View}" update=":RepartoViewForm" oncomplete="RepartoViewDialog.show()" disabled="#{empty repartoController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{appBundle.Edit}" update=":RepartoEditForm" oncomplete="RepartoEditDialog.show()" disabled="#{empty repartoController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{appBundle.Delete}" actionListener="#{repartoController.delete}" update=":growl,datalist" disabled="#{empty repartoController.selected}">
+                <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipRespViewDlg" widgetVar="TipRespViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.ViewTipRespTitle}" closeOnEscape="true">
+
+            <h:form id="TipRespViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{tipRespController.selected != null}">
+
+                        <h:outputText value="#{appBundle.ViewTipRespLabel_treCodigo}"/>
+                        <h:outputText value="#{tipRespController.selected.treCodigo}" title="#{appBundle.ViewTipRespTitle_treCodigo}"/>
+
+                        <h:outputText value="#{appBundle.ViewTipRespLabel_treDescri}"/>
+                        <h:outputText value="#{tipRespController.selected.treDescri}" title="#{appBundle.ViewTipRespTitle_treDescri}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{appBundle.Close}" onclick="TipRespViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipRespCreateDlg" widgetVar="TipRespCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{appBundle.CreateTipRespTitle}" closeOnEscape="true">
+
+            <h:form id="TipRespCreateForm">
+
+                <h:panelGroup id="display" rendered="#{tipRespController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{appBundle.CreateTipRespLabel_treDescri}" for="treDescri" />
+                        <p:inputText id="treDescri" value="#{tipRespController.selected.treDescri}" title="#{appBundle.CreateTipRespTitle_treDescri}" size="100" maxlength="100"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipRespController.saveNew}" value="#{appBundle.Save}" update="display,:TipRespListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,TipRespCreateDialog);">
+                        <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{appBundle.Cancel}" onclick="TipRespCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

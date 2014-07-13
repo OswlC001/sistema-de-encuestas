@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PreguntaCreateDlg" widgetVar="PreguntaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{appBundle.CreatePreguntaTitle}" closeOnEscape="true">
+
+            <h:form id="PreguntaCreateForm">
+
+                <h:panelGroup id="display" rendered="#{preguntaController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{appBundle.CreatePreguntaLabel_treCodigo}" for="treCodigo" />
+                        <p:inputText id="treCodigo" value="#{preguntaController.selected.treCodigo}" title="#{appBundle.CreatePreguntaTitle_treCodigo}"/>
+
+                        <p:outputLabel value="#{appBundle.CreatePreguntaLabel_servId}" for="servId" />
+                        <p:inputText id="servId" value="#{preguntaController.selected.servId}" title="#{appBundle.CreatePreguntaTitle_servId}"/>
+
+                        <p:outputLabel value="#{appBundle.CreatePreguntaLabel_encCodigo}" for="encCodigo" />
+                        <p:inputText id="encCodigo" value="#{preguntaController.selected.encCodigo}" title="#{appBundle.CreatePreguntaTitle_encCodigo}"/>
+
+                        <p:outputLabel value="#{appBundle.CreatePreguntaLabel_prePregunta}" for="prePregunta" />
+                        <p:inputTextarea rows="4" cols="30" id="prePregunta" value="#{preguntaController.selected.prePregunta}" title="#{appBundle.CreatePreguntaTitle_prePregunta}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{preguntaController.saveNew}" value="#{appBundle.Save}" update="display,:PreguntaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PreguntaCreateDialog);">
+                        <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{appBundle.Cancel}" onclick="PreguntaCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

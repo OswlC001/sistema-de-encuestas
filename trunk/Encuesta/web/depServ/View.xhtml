@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepServViewDlg" widgetVar="DepServViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.ViewDepServTitle}" closeOnEscape="true">
+
+            <h:form id="DepServViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{depServController.selected != null}">
+
+                        <h:outputText value="#{appBundle.ViewDepServLabel_depServPK_servId}"/>
+                        <h:outputText value="#{depServController.selected.depServPK.servId}" title="#{appBundle.ViewDepServTitle_depServPK_servId}"/>
+
+                        <h:outputText value="#{appBundle.ViewDepServLabel_depServPK_depId}"/>
+                        <h:outputText value="#{depServController.selected.depServPK.depId}" title="#{appBundle.ViewDepServTitle_depServPK_depId}"/>
+
+                        <h:outputText value="#{appBundle.ViewDepServLabel_tipAccion}"/>
+                        <h:outputText value="#{depServController.selected.tipAccion}" title="#{appBundle.ViewDepServTitle_tipAccion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{appBundle.Close}" onclick="DepServViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

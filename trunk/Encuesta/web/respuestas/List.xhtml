@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="RespuestasListForm">
+
+        <p:panel header="#{appBundle.ListRespuestasTitle}">
+            <p:contextMenu id="RespuestasDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{appBundle.Create}" onclick="document.getElementById('RespuestasListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{appBundle.View}" onclick="document.getElementById('RespuestasListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{appBundle.Edit}" onclick="document.getElementById('RespuestasListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{appBundle.Delete}" onclick="document.getElementById('RespuestasListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{respuestasController.items}"
+                         var="item"
+                         rowKey="#{item.resCodigo}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{respuestasController.selected}">
+
+                <p:ajax event="rowSelect"   update=":RespuestasListForm:createButton :RespuestasListForm:viewButton :RespuestasListForm:editButton :RespuestasListForm:deleteButton :RespuestasListForm:RespuestasDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":RespuestasListForm:createButton :RespuestasListForm:viewButton :RespuestasListForm:editButton :RespuestasListForm:deleteButton :RespuestasListForm:RespuestasDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('RespuestasListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.resCodigo}" filterBy="#{item.resCodigo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListRespuestasTitle_resCodigo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.resCodigo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.usrId}" filterBy="#{item.usrId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListRespuestasTitle_usrId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.usrId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.preCodigo}" filterBy="#{item.preCodigo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListRespuestasTitle_preCodigo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.preCodigo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.oreCodigo}" filterBy="#{item.oreCodigo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListRespuestasTitle_oreCodigo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.oreCodigo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.resResplibre}" filterBy="#{item.resResplibre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListRespuestasTitle_resResplibre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.resResplibre}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{appBundle.Create}" actionListener="#{respuestasController.prepareCreate}" update=":RespuestasCreateForm" oncomplete="RespuestasCreateDialog.show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{appBundle.View}" update=":RespuestasViewForm" oncomplete="RespuestasViewDialog.show()" disabled="#{empty respuestasController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{appBundle.Edit}" update=":RespuestasEditForm" oncomplete="RespuestasEditDialog.show()" disabled="#{empty respuestasController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{appBundle.Delete}" actionListener="#{respuestasController.delete}" update=":growl,datalist" disabled="#{empty respuestasController.selected}">
+                <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

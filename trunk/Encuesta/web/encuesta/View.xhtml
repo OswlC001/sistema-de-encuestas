@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EncuestaViewDlg" widgetVar="EncuestaViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.ViewEncuestaTitle}" closeOnEscape="true">
+
+            <h:form id="EncuestaViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{encuestaController.selected != null}">
+
+                        <h:outputText value="#{appBundle.ViewEncuestaLabel_encCodigo}"/>
+                        <h:outputText value="#{encuestaController.selected.encCodigo}" title="#{appBundle.ViewEncuestaTitle_encCodigo}"/>
+
+                        <h:outputText value="#{appBundle.ViewEncuestaLabel_encDescri}"/>
+                        <h:outputText value="#{encuestaController.selected.encDescri}" title="#{appBundle.ViewEncuestaTitle_encDescri}"/>
+
+                        <h:outputText value="#{appBundle.ViewEncuestaLabel_encEstado}"/>
+                        <h:outputText value="#{encuestaController.selected.encEstado}" title="#{appBundle.ViewEncuestaTitle_encEstado}"/>
+
+                        <h:outputText value="#{appBundle.ViewEncuestaLabel_encFechini}"/>
+                        <h:outputText value="#{encuestaController.selected.encFechini}" title="#{appBundle.ViewEncuestaTitle_encFechini}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{appBundle.ViewEncuestaLabel_encFecfin}"/>
+                        <h:outputText value="#{encuestaController.selected.encFecfin}" title="#{appBundle.ViewEncuestaTitle_encFecfin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{appBundle.ViewEncuestaLabel_encFiltXSrv}"/>
+                        <h:outputText value="#{encuestaController.selected.encFiltXSrv}" title="#{appBundle.ViewEncuestaTitle_encFiltXSrv}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{appBundle.Close}" onclick="EncuestaViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

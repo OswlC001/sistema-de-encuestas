@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="OpcRespListForm">
+
+        <p:panel header="#{appBundle.ListOpcRespTitle}">
+            <p:contextMenu id="OpcRespDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{appBundle.Create}" onclick="document.getElementById('OpcRespListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{appBundle.View}" onclick="document.getElementById('OpcRespListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{appBundle.Edit}" onclick="document.getElementById('OpcRespListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{appBundle.Delete}" onclick="document.getElementById('OpcRespListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{opcRespController.items}"
+                         var="item"
+                         rowKey="#{item.oreCodigo}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{opcRespController.selected}">
+
+                <p:ajax event="rowSelect"   update=":OpcRespListForm:createButton :OpcRespListForm:viewButton :OpcRespListForm:editButton :OpcRespListForm:deleteButton :OpcRespListForm:OpcRespDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":OpcRespListForm:createButton :OpcRespListForm:viewButton :OpcRespListForm:editButton :OpcRespListForm:deleteButton :OpcRespListForm:OpcRespDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('OpcRespListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.oreCodigo}" filterBy="#{item.oreCodigo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListOpcRespTitle_oreCodigo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.oreCodigo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.treCodigo}" filterBy="#{item.treCodigo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListOpcRespTitle_treCodigo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.treCodigo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.oreDescri}" filterBy="#{item.oreDescri}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListOpcRespTitle_oreDescri}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.oreDescri}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{appBundle.Create}" actionListener="#{opcRespController.prepareCreate}" update=":OpcRespCreateForm" oncomplete="OpcRespCreateDialog.show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{appBundle.View}" update=":OpcRespViewForm" oncomplete="OpcRespViewDialog.show()" disabled="#{empty opcRespController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{appBundle.Edit}" update=":OpcRespEditForm" oncomplete="OpcRespEditDialog.show()" disabled="#{empty opcRespController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{appBundle.Delete}" actionListener="#{opcRespController.delete}" update=":growl,datalist" disabled="#{empty opcRespController.selected}">
+                <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

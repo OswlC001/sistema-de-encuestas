@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="DepServEditDlg" widgetVar="DepServEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.EditDepServTitle}" closeOnEscape="true">
+
+            <h:form id="DepServEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{depServController.selected != null}">
+
+
+                        <h:outputLabel value="#{appBundle.EditDepServLabel_depServPK_servId}" for="depServPK_servId" />
+                        <h:outputText id="depServPK_servId" value="#{depServController.selected.depServPK.servId}" />
+
+
+                        <h:outputLabel value="#{appBundle.EditDepServLabel_depServPK_depId}" for="depServPK_depId" />
+                        <h:outputText id="depServPK_depId" value="#{depServController.selected.depServPK.depId}" />
+
+                        <p:outputLabel value="#{appBundle.EditDepServLabel_tipAccion}" for="tipAccion" />
+                        <p:inputText id="tipAccion" value="#{depServController.selected.tipAccion}" title="#{appBundle.EditDepServTitle_tipAccion}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{depServController.save}" value="#{appBundle.Save}" update="display,:DepServListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DepServEditDialog);">
+                        <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{appBundle.Cancel}" onclick="DepServEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

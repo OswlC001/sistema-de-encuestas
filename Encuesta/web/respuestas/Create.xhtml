@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RespuestasCreateDlg" widgetVar="RespuestasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{appBundle.CreateRespuestasTitle}" closeOnEscape="true">
+
+            <h:form id="RespuestasCreateForm">
+
+                <h:panelGroup id="display" rendered="#{respuestasController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{appBundle.CreateRespuestasLabel_usrId}" for="usrId" />
+                        <p:inputText id="usrId" value="#{respuestasController.selected.usrId}" title="#{appBundle.CreateRespuestasTitle_usrId}"/>
+
+                        <p:outputLabel value="#{appBundle.CreateRespuestasLabel_preCodigo}" for="preCodigo" />
+                        <p:inputText id="preCodigo" value="#{respuestasController.selected.preCodigo}" title="#{appBundle.CreateRespuestasTitle_preCodigo}"/>
+
+                        <p:outputLabel value="#{appBundle.CreateRespuestasLabel_oreCodigo}" for="oreCodigo" />
+                        <p:inputText id="oreCodigo" value="#{respuestasController.selected.oreCodigo}" title="#{appBundle.CreateRespuestasTitle_oreCodigo}"/>
+
+                        <p:outputLabel value="#{appBundle.CreateRespuestasLabel_resResplibre}" for="resResplibre" />
+                        <p:inputTextarea rows="4" cols="30" id="resResplibre" value="#{respuestasController.selected.resResplibre}" title="#{appBundle.CreateRespuestasTitle_resResplibre}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{respuestasController.saveNew}" value="#{appBundle.Save}" update="display,:RespuestasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,RespuestasCreateDialog);">
+                        <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{appBundle.Cancel}" onclick="RespuestasCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

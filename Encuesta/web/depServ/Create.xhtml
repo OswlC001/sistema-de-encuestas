@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepServCreateDlg" widgetVar="DepServCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{appBundle.CreateDepServTitle}" closeOnEscape="true">
+
+            <h:form id="DepServCreateForm">
+
+                <h:panelGroup id="display" rendered="#{depServController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{appBundle.CreateDepServLabel_depServPK_servId}" for="depServPK_servId" />
+                        <p:inputText id="depServPK_servId" value="#{depServController.selected.depServPK.servId}" title="#{appBundle.CreateDepServTitle_depServPK_servId}" required="true" requiredMessage="#{appBundle.CreateDepServRequiredMessage_depServPK_servId}"/>
+
+                        <p:outputLabel value="#{appBundle.CreateDepServLabel_depServPK_depId}" for="depServPK_depId" />
+                        <p:inputText id="depServPK_depId" value="#{depServController.selected.depServPK.depId}" title="#{appBundle.CreateDepServTitle_depServPK_depId}" required="true" requiredMessage="#{appBundle.CreateDepServRequiredMessage_depServPK_depId}"/>
+
+                        <p:outputLabel value="#{appBundle.CreateDepServLabel_tipAccion}" for="tipAccion" />
+                        <p:inputText id="tipAccion" value="#{depServController.selected.tipAccion}" title="#{appBundle.CreateDepServTitle_tipAccion}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{depServController.saveNew}" value="#{appBundle.Save}" update="display,:DepServListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DepServCreateDialog);">
+                        <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{appBundle.Cancel}" onclick="DepServCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

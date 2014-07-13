@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OpcRespViewDlg" widgetVar="OpcRespViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.ViewOpcRespTitle}" closeOnEscape="true">
+
+            <h:form id="OpcRespViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{opcRespController.selected != null}">
+
+                        <h:outputText value="#{appBundle.ViewOpcRespLabel_oreCodigo}"/>
+                        <h:outputText value="#{opcRespController.selected.oreCodigo}" title="#{appBundle.ViewOpcRespTitle_oreCodigo}"/>
+
+                        <h:outputText value="#{appBundle.ViewOpcRespLabel_treCodigo}"/>
+                        <h:outputText value="#{opcRespController.selected.treCodigo}" title="#{appBundle.ViewOpcRespTitle_treCodigo}"/>
+
+                        <h:outputText value="#{appBundle.ViewOpcRespLabel_oreDescri}"/>
+                        <h:outputText value="#{opcRespController.selected.oreDescri}" title="#{appBundle.ViewOpcRespTitle_oreDescri}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{appBundle.Close}" onclick="OpcRespViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

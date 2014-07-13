@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepartamentoCreateDlg" widgetVar="DepartamentoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{appBundle.CreateDepartamentoTitle}" closeOnEscape="true">
+
+            <h:form id="DepartamentoCreateForm">
+
+                <h:panelGroup id="display" rendered="#{departamentoController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{appBundle.CreateDepartamentoLabel_repaCodigo2}" for="repaCodigo2" />
+                        <p:inputText id="repaCodigo2" value="#{departamentoController.selected.repaCodigo2}" title="#{appBundle.CreateDepartamentoTitle_repaCodigo2}" size="6" maxlength="6"/>
+
+                        <p:outputLabel value="#{appBundle.CreateDepartamentoLabel_depSiglas}" for="depSiglas" />
+                        <p:inputText id="depSiglas" value="#{departamentoController.selected.depSiglas}" title="#{appBundle.CreateDepartamentoTitle_depSiglas}" size="3" maxlength="3"/>
+
+                        <p:outputLabel value="#{appBundle.CreateDepartamentoLabel_depDenominacion}" for="depDenominacion" />
+                        <p:inputText id="depDenominacion" value="#{departamentoController.selected.depDenominacion}" title="#{appBundle.CreateDepartamentoTitle_depDenominacion}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{appBundle.CreateDepartamentoLabel_depActi}" for="depActi" />
+                        <p:selectBooleanCheckbox id="depActi" value="#{departamentoController.selected.depActi}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{departamentoController.saveNew}" value="#{appBundle.Save}" update="display,:DepartamentoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DepartamentoCreateDialog);">
+                        <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{appBundle.Cancel}" onclick="DepartamentoCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

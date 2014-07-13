@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepartamentoViewDlg" widgetVar="DepartamentoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.ViewDepartamentoTitle}" closeOnEscape="true">
+
+            <h:form id="DepartamentoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{departamentoController.selected != null}">
+
+                        <h:outputText value="#{appBundle.ViewDepartamentoLabel_depId}"/>
+                        <h:outputText value="#{departamentoController.selected.depId}" title="#{appBundle.ViewDepartamentoTitle_depId}"/>
+
+                        <h:outputText value="#{appBundle.ViewDepartamentoLabel_repaCodigo2}"/>
+                        <h:outputText value="#{departamentoController.selected.repaCodigo2}" title="#{appBundle.ViewDepartamentoTitle_repaCodigo2}"/>
+
+                        <h:outputText value="#{appBundle.ViewDepartamentoLabel_depSiglas}"/>
+                        <h:outputText value="#{departamentoController.selected.depSiglas}" title="#{appBundle.ViewDepartamentoTitle_depSiglas}"/>
+
+                        <h:outputText value="#{appBundle.ViewDepartamentoLabel_depDenominacion}"/>
+                        <h:outputText value="#{departamentoController.selected.depDenominacion}" title="#{appBundle.ViewDepartamentoTitle_depDenominacion}"/>
+
+                        <h:outputText value="#{appBundle.ViewDepartamentoLabel_depActi}"/>
+                        <h:selectBooleanCheckbox id="depActi" value="#{departamentoController.selected.depActi}" title="#{appBundle.EditDepartamentoTitle_depActi}"  disabled="true"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{appBundle.Close}" onclick="DepartamentoViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

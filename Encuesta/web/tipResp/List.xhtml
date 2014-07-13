@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="TipRespListForm">
+
+        <p:panel header="#{appBundle.ListTipRespTitle}">
+            <p:contextMenu id="TipRespDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{appBundle.Create}" onclick="document.getElementById('TipRespListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{appBundle.View}" onclick="document.getElementById('TipRespListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{appBundle.Edit}" onclick="document.getElementById('TipRespListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{appBundle.Delete}" onclick="document.getElementById('TipRespListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{tipRespController.items}"
+                         var="item"
+                         rowKey="#{item.treCodigo}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{tipRespController.selected}">
+
+                <p:ajax event="rowSelect"   update=":TipRespListForm:createButton :TipRespListForm:viewButton :TipRespListForm:editButton :TipRespListForm:deleteButton :TipRespListForm:TipRespDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":TipRespListForm:createButton :TipRespListForm:viewButton :TipRespListForm:editButton :TipRespListForm:deleteButton :TipRespListForm:TipRespDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('TipRespListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.treCodigo}" filterBy="#{item.treCodigo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListTipRespTitle_treCodigo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.treCodigo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.treDescri}" filterBy="#{item.treDescri}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListTipRespTitle_treDescri}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.treDescri}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{appBundle.Create}" actionListener="#{tipRespController.prepareCreate}" update=":TipRespCreateForm" oncomplete="TipRespCreateDialog.show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{appBundle.View}" update=":TipRespViewForm" oncomplete="TipRespViewDialog.show()" disabled="#{empty tipRespController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{appBundle.Edit}" update=":TipRespEditForm" oncomplete="TipRespEditDialog.show()" disabled="#{empty tipRespController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{appBundle.Delete}" actionListener="#{tipRespController.delete}" update=":growl,datalist" disabled="#{empty tipRespController.selected}">
+                <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

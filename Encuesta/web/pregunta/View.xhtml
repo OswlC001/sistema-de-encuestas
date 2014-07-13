@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PreguntaViewDlg" widgetVar="PreguntaViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{appBundle.ViewPreguntaTitle}" closeOnEscape="true">
+
+            <h:form id="PreguntaViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{preguntaController.selected != null}">
+
+                        <h:outputText value="#{appBundle.ViewPreguntaLabel_preCodigo}"/>
+                        <h:outputText value="#{preguntaController.selected.preCodigo}" title="#{appBundle.ViewPreguntaTitle_preCodigo}"/>
+
+                        <h:outputText value="#{appBundle.ViewPreguntaLabel_treCodigo}"/>
+                        <h:outputText value="#{preguntaController.selected.treCodigo}" title="#{appBundle.ViewPreguntaTitle_treCodigo}"/>
+
+                        <h:outputText value="#{appBundle.ViewPreguntaLabel_servId}"/>
+                        <h:outputText value="#{preguntaController.selected.servId}" title="#{appBundle.ViewPreguntaTitle_servId}"/>
+
+                        <h:outputText value="#{appBundle.ViewPreguntaLabel_encCodigo}"/>
+                        <h:outputText value="#{preguntaController.selected.encCodigo}" title="#{appBundle.ViewPreguntaTitle_encCodigo}"/>
+
+                        <h:outputText value="#{appBundle.ViewPreguntaLabel_prePregunta}"/>
+                        <h:outputText value="#{preguntaController.selected.prePregunta}" title="#{appBundle.ViewPreguntaTitle_prePregunta}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{appBundle.Close}" onclick="PreguntaViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

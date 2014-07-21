@@ -3,6 +3,7 @@ package backingBeans;
 import entidades.Pregunta;
 import entidades.Respuestas;
 import entidades.Servicio;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.component.UIInput;
@@ -21,7 +22,7 @@ public class RespuestasController extends AbstractController<Respuestas> {
     @EJB
     private PreguntaFacade preguntaFacade;
 
-    List<Servicio> selectedServ;
+    List selectedServ;
 
     public RespuestasController() {
         // Inform the Abstract parent controller of the concrete Respuestas?cap_first Entity
@@ -36,16 +37,26 @@ public class RespuestasController extends AbstractController<Respuestas> {
             return "";
         }
     }
+    
+    public Long tipResp(Long codigo) {
+        Pregunta pregObj = preguntaFacade.find(codigo);
+        if (pregObj != null) {
+            return pregObj.getTreCodigo();
+        } else {
+            return null;
+        }
+    }
 
-    public List<Servicio> getSelectedServ() {
+    public List getSelectedServ() {
         return selectedServ;
     }
 
-    public void setSelectedServ(List<Servicio> selectedServ) {
+    public void setSelectedServ(List selectedServ) {
         this.selectedServ = selectedServ;
     }
 
     public String continuarEncuesta() {
+        System.out.println(selectedServ.get(1).toString());
         return "/respuestas/Encuesta";
     }
 

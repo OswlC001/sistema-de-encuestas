@@ -25,7 +25,7 @@
                                                   layout="grid" 
                                                   columns="1" 
                                                   style="margin-left: 10px; width: 100px">
-                                    <f:selectItems id="selRad" value="#{opcRespController.items}" var="itemResp" itemValue="#{itemResp.oreCodigo}" itemLabel="#{itemResp.oreDescri}"/>  
+                                    <f:selectItems id="selRad" value="#{opcRespController.getItemsXPreg(respuestasController.tipResp(item.preCodigo))}" var="itemResp" itemValue="#{itemResp.oreCodigo}" itemLabel="#{itemResp.oreDescri}"/>  
                                     <f:attribute name="respuesta" value="#{item}"/>
                                 </p:selectOneRadio>
                             </p>

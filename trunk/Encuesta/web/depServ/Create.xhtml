@@ -16,13 +16,18 @@
                     <p:panelGrid columns="2" columnClasses="column">
 
                         <p:outputLabel value="#{appBundle.CreateDepServLabel_depServPK_servId}" for="depServPK_servId" />
-                        <p:inputText id="depServPK_servId" value="#{depServController.selected.depServPK.servId}" title="#{appBundle.CreateDepServTitle_depServPK_servId}" required="true" requiredMessage="#{appBundle.CreateDepServRequiredMessage_depServPK_servId}"/>
+                        <p:selectOneMenu id="depServPK_servId" value="#{depServController.selected.depServPK.servId}">
+                            <f:selectItems id="sel2" value="#{servicioController.items}" var="itemServ" itemValue="#{itemServ.servId}" itemLabel="#{itemServ.servDeno}"/>  
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{appBundle.CreateDepServLabel_depServPK_depId}" for="depServPK_depId" />
-                        <p:inputText id="depServPK_depId" value="#{depServController.selected.depServPK.depId}" title="#{appBundle.CreateDepServTitle_depServPK_depId}" required="true" requiredMessage="#{appBundle.CreateDepServRequiredMessage_depServPK_depId}"/>
+                        <p:selectOneMenu id="depServPK_depId" value="#{depServController.selected.depServPK.depId}">
+                            <f:selectItems id="sel3" value="#{departamentoController.items}" var="itemDep" itemValue="#{itemDep.depId}" itemLabel="#{itemDep.depDenominacion}"/>  
+                        </p:selectOneMenu>
 
-                        <p:outputLabel value="#{appBundle.CreateDepServLabel_tipAccion}" for="tipAccion" />
-                        <p:inputText id="tipAccion" value="#{depServController.selected.tipAccion}" title="#{appBundle.CreateDepServTitle_tipAccion}"/>
+                        <!--p:outputLabel value="Acción:" for="tipAccion" />
+                        <p:inputText id="tipAccion" value="#{depServController.selected.tipAccion}" title="#{appBundle.CreateDepServTitle_tipAccion}"/-->
+                       
                     </p:panelGrid>
                     <p:commandButton actionListener="#{depServController.saveNew}" value="#{appBundle.Save}" update="display,:DepServListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DepServCreateDialog);">
                         <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>

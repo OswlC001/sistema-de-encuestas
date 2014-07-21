@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entidades;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -35,9 +35,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Respuestas.findByOreCodigo", query = "SELECT r FROM Respuestas r WHERE r.oreCodigo = :oreCodigo"),
     @NamedQuery(name = "Respuestas.findByResResplibre", query = "SELECT r FROM Respuestas r WHERE r.resResplibre = :resResplibre")})
 public class Respuestas implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RES_CODIGO")
     private Long resCodigo;
     @Column(name = "USR_ID")
@@ -49,10 +50,21 @@ public class Respuestas implements Serializable {
     @Size(max = 400)
     @Column(name = "RES_RESPLIBRE")
     private String resResplibre;
+    @Column(name = "RES_FECHA")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date resFecha;
 
     public Respuestas() {
     }
 
+    public Date getResFecha() {
+        return resFecha;
+    }
+
+    public void setResFecha(Date resFecha) {
+        this.resFecha = resFecha;
+    }   
+    
     public Respuestas(Long resCodigo) {
         this.resCodigo = resCodigo;
     }
@@ -121,5 +133,5 @@ public class Respuestas implements Serializable {
     public String toString() {
         return "entidades.Respuestas[ resCodigo=" + resCodigo + " ]";
     }
-    
+
 }

@@ -16,7 +16,7 @@
         <center>
             <h:form id="EncuestaForm">
                 <p:panel header="Encuesta sobre la calidad de servicios" style="width: 70%">
-                    <p:dataTable id="datalist" value="#{respuestasController.items}" var="item">               
+                    <p:dataTable id="datalist" value="#{respuestasController.itemsRespuesta}" var="item">               
                         <p:column>         
                             <p> <h:outputText value="#{respuestasController.pregunta(item.preCodigo)}"/>                               
                                 <p:selectOneRadio id="radio1" 

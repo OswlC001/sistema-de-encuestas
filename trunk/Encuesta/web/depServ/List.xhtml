@@ -33,7 +33,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{appBundle.ListDepServTitle_depServPK_servId}"/>
                     </f:facet>
-                    <h:outputText value="#{item.depServPK.servId}"/>
+                    <h:outputText value="#{servicioController.findObj(item.depServPK.servId).servDeno}"/>
                 </p:column>
 
 
@@ -41,16 +41,16 @@
                     <f:facet name="header">
                         <h:outputText value="#{appBundle.ListDepServTitle_depServPK_depId}"/>
                     </f:facet>
-                    <h:outputText value="#{item.depServPK.depId}"/>
+                    <h:outputText value="#{departamentoController.findObj(item.depServPK.depId).depDenominacion}"/>
                 </p:column>
 
 
-                <p:column sortBy="#{item.tipAccion}" filterBy="#{item.tipAccion}">
+                <!--p:column sortBy="#{item.tipAccion}" filterBy="#{item.tipAccion}">
                     <f:facet name="header">
                         <h:outputText value="#{appBundle.ListDepServTitle_tipAccion}"/>
                     </f:facet>
                     <h:outputText value="#{item.tipAccion}"/>
-                </p:column>
+                </p:column-->
 
 
             </p:dataTable>

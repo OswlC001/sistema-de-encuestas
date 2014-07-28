@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package sessionBeans;
 
-import entidades.Pregunta;
-import java.util.List;
+import entidades.EncUsuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,8 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author SiperProg
  */
 @Stateless
-public class PreguntaFacade extends AbstractFacade<Pregunta> {
-
+public class EncUsuarioFacade extends AbstractFacade<EncUsuario> {
     @PersistenceContext(unitName = "EncuestaPU")
     private EntityManager em;
 
@@ -26,13 +25,8 @@ public class PreguntaFacade extends AbstractFacade<Pregunta> {
         return em;
     }
 
-    public PreguntaFacade() {
-        super(Pregunta.class);
+    public EncUsuarioFacade() {
+        super(EncUsuario.class);
     }
-
-    public List<Pregunta> getPreguntas(Long servId) {
-        List<Pregunta> preguntas = em.createQuery("SELECT p FROM Pregunta p WHERE p.servId = :servId").setParameter("servId", servId).getResultList();
-        return preguntas;
-    }
-
+    
 }

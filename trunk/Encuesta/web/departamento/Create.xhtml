@@ -15,8 +15,10 @@
                 <h:panelGroup id="display" rendered="#{departamentoController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
 
-                        <p:outputLabel value="#{appBundle.CreateDepartamentoLabel_repaCodigo2}" for="repaCodigo2" />
-                        <p:inputText id="repaCodigo2" value="#{departamentoController.selected.repaCodigo2}" title="#{appBundle.CreateDepartamentoTitle_repaCodigo2}" size="6" maxlength="6"/>
+                        <p:outputLabel value="#{appBundle.CreateDepartamentoLabel_repaCodigo2}" for="repaCodigo3" />
+                        <p:selectOneMenu id="repaCodigo3" value="#{departamentoController.selected.repaCodigo2}">
+                            <f:selectItems value="#{repartoController.items}" var="itemR" itemValue="#{itemR.repaCodigo2}" itemLabel="#{itemR.repaDenominacion}"/>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{appBundle.CreateDepartamentoLabel_depSiglas}" for="depSiglas" />
                         <p:inputText id="depSiglas" value="#{departamentoController.selected.depSiglas}" title="#{appBundle.CreateDepartamentoTitle_depSiglas}" size="3" maxlength="3"/>

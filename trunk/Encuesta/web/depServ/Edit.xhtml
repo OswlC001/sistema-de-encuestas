@@ -22,8 +22,8 @@
                         <h:outputLabel value="#{appBundle.EditDepServLabel_depServPK_depId}" for="depServPK_depId" />
                         <h:outputText id="depServPK_depId" value="#{depServController.selected.depServPK.depId}" />
 
-                        <p:outputLabel value="#{appBundle.EditDepServLabel_tipAccion}" for="tipAccion" />
-                        <p:inputText id="tipAccion" value="#{depServController.selected.tipAccion}" title="#{appBundle.EditDepServTitle_tipAccion}"/>
+                        <!--p:outputLabel value="#{appBundle.EditDepServLabel_tipAccion}" for="tipAccion" />
+                        <p:inputText id="tipAccion" value="#{depServController.selected.tipAccion}" title="#{appBundle.EditDepServTitle_tipAccion}"/-->
                     </p:panelGrid>
                     <p:commandButton actionListener="#{depServController.save}" value="#{appBundle.Save}" update="display,:DepServListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DepServEditDialog);">
                         <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>

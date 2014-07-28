@@ -15,17 +15,20 @@
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{preguntaController.selected != null}">
 
 
-                        <h:outputLabel value="#{appBundle.EditPreguntaLabel_preCodigo}" for="preCodigo" />
-                        <h:outputText id="preCodigo" value="#{preguntaController.selected.preCodigo}" />
+                        <p:outputLabel value="#{appBundle.CreatePreguntaLabel_treCodigo}" for="treCodigo" />
+                        <p:selectOneMenu id="treCodigo" value="#{preguntaController.selected.treCodigo}">
+                            <f:selectItems value="#{tipRespController.items}" var="itemTRes" itemValue="#{itemTRes.treCodigo}" itemLabel="#{itemTRes.treDescri}"/>
+                        </p:selectOneMenu>
 
-                        <p:outputLabel value="#{appBundle.EditPreguntaLabel_treCodigo}" for="treCodigo" />
-                        <p:inputText id="treCodigo" value="#{preguntaController.selected.treCodigo}" title="#{appBundle.EditPreguntaTitle_treCodigo}"/>
+                        <p:outputLabel value="#{appBundle.CreatePreguntaLabel_servId}" for="servId" />
+                        <p:selectOneMenu id="servId" value="#{preguntaController.selected.servId}">
+                            <f:selectItems value="#{servicioController.items}" var="itemServ" itemValue="#{itemServ.servId}" itemLabel="#{itemServ.servDeno}"/>
+                        </p:selectOneMenu>
 
-                        <p:outputLabel value="#{appBundle.EditPreguntaLabel_servId}" for="servId" />
-                        <p:inputText id="servId" value="#{preguntaController.selected.servId}" title="#{appBundle.EditPreguntaTitle_servId}"/>
-
-                        <p:outputLabel value="#{appBundle.EditPreguntaLabel_encCodigo}" for="encCodigo" />
-                        <p:inputText id="encCodigo" value="#{preguntaController.selected.encCodigo}" title="#{appBundle.EditPreguntaTitle_encCodigo}"/>
+                        <p:outputLabel value="#{appBundle.CreatePreguntaLabel_encCodigo}" for="encCodigo" />
+                        <p:selectOneMenu id="encCodigo" value="#{preguntaController.selected.encCodigo}">
+                            <f:selectItems value="#{encuestaController.items}" var="itemEnc" itemValue="#{itemEnc.encCodigo}" itemLabel="#{itemEnc.encDescri}"/>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{appBundle.EditPreguntaLabel_prePregunta}" for="prePregunta" />
                         <p:inputTextarea rows="4" cols="30" id="prePregunta" value="#{preguntaController.selected.prePregunta}" title="#{appBundle.EditPreguntaTitle_prePregunta}" />

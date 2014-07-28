@@ -84,6 +84,18 @@ public abstract class AbstractController<T> implements Serializable {
     }
 
     /**
+     * Retorna el objeto por el ID.
+     *
+     * @param id
+     * @return el objeto por el ID
+     */
+    
+    public T findObj(Object id) {
+        T obj = this.ejbFacade.find(id);
+        return obj;
+    }
+
+    /**
      * Returns all items as a Collection object.
      *
      * @return a collection of Entity items returned by the data layer

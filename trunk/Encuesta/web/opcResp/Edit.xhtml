@@ -19,8 +19,10 @@
                         <h:outputText id="oreCodigo" value="#{opcRespController.selected.oreCodigo}" />
 
                         <p:outputLabel value="#{appBundle.EditOpcRespLabel_treCodigo}" for="treCodigo" />
-                        <p:inputText id="treCodigo" value="#{opcRespController.selected.treCodigo}" title="#{appBundle.EditOpcRespTitle_treCodigo}"/>
-
+                        <p:selectOneMenu id="treCodigo" value="#{opcRespController.selected.treCodigo}">
+                            <f:selectItems value="#{tipRespController.items}" var="itemsResp" itemValue="#{itemsResp.treCodigo}" itemLabel="#{itemsResp.treDescri}"/>
+                        </p:selectOneMenu>
+                        
                         <p:outputLabel value="#{appBundle.EditOpcRespLabel_oreDescri}" for="oreDescri" />
                         <p:inputText id="oreDescri" value="#{opcRespController.selected.oreDescri}" title="#{appBundle.EditOpcRespTitle_oreDescri}" size="100" maxlength="100"/>
                     </p:panelGrid>

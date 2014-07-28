@@ -41,7 +41,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{appBundle.ListDepartamentoTitle_repaCodigo2}"/>
                     </f:facet>
-                    <h:outputText value="#{item.repaCodigo2}"/>
+                    <h:outputText value="#{repartoController.findObj(item.repaCodigo2).repaDenominacion}"/>
                 </p:column>
 
 

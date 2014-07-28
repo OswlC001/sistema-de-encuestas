@@ -34,24 +34,21 @@
                         <h:outputText value="#{appBundle.ListUsuarioTitle_usrId}"/>
                     </f:facet>
                     <h:outputText value="#{item.usrId}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.depId}" filterBy="#{item.depId}">
-                    <f:facet name="header">
-                        <h:outputText value="#{appBundle.ListUsuarioTitle_depId}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.depId}"/>
-                </p:column>
-
+                </p:column>              
 
                 <p:column sortBy="#{item.repaCodigo}" filterBy="#{item.repaCodigo}">
                     <f:facet name="header">
                         <h:outputText value="#{appBundle.ListUsuarioTitle_repaCodigo}"/>
                     </f:facet>
-                    <h:outputText value="#{item.repaCodigo}"/>
+                    <h:outputText value="#{repartoController.findObj(item.repaCodigo).repaDenominacion}"/>
                 </p:column>
 
+                <p:column sortBy="#{item.depId}" filterBy="#{item.depId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListUsuarioTitle_depId}"/>
+                    </f:facet>
+                    <h:outputText value="#{departamentoController.findObj(item.depId).depDenominacion}"/>
+                </p:column>
 
                 <p:column sortBy="#{item.usrCi}" filterBy="#{item.usrCi}">
                     <f:facet name="header">
@@ -108,14 +105,14 @@
                                         <h:outputText value="#{item.usrClave}"/>
                                     </p:column>
                 -->
-                <!--
-                                    <p:column sortBy="#{item.usrTipo}" filterBy="#{item.usrTipo}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{appBundle.ListUsuarioTitle_usrTipo}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.usrTipo}"/>
-                                    </p:column>
-                -->
+
+                <p:column sortBy="#{item.usrTipo}" filterBy="#{item.usrTipo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{appBundle.ListUsuarioTitle_usrTipo}"/>
+                    </f:facet>
+                    <h:outputText value="#{(item.usrTipo=='A' ? 'ADMININSTRADOR' : 'NORMAL')}"/>
+                </p:column>
+
 
             </p:dataTable>
 

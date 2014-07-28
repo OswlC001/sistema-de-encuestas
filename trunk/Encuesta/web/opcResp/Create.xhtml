@@ -16,7 +16,9 @@
                     <p:panelGrid columns="2" columnClasses="column">
 
                         <p:outputLabel value="#{appBundle.CreateOpcRespLabel_treCodigo}" for="treCodigo" />
-                        <p:inputText id="treCodigo" value="#{opcRespController.selected.treCodigo}" title="#{appBundle.CreateOpcRespTitle_treCodigo}"/>
+                        <p:selectOneMenu id="treCodigo" value="#{opcRespController.selected.treCodigo}">
+                            <f:selectItems value="#{tipRespController.items}" var="itemsResp" itemValue="#{itemsResp.treCodigo}" itemLabel="#{itemsResp.treDescri}"/>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{appBundle.CreateOpcRespLabel_oreDescri}" for="oreDescri" />
                         <p:inputText id="oreDescri" value="#{opcRespController.selected.oreDescri}" title="#{appBundle.CreateOpcRespTitle_oreDescri}" size="100" maxlength="100"/>

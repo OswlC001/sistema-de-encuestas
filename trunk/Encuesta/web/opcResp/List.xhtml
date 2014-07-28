@@ -41,7 +41,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{appBundle.ListOpcRespTitle_treCodigo}"/>
                     </f:facet>
-                    <h:outputText value="#{item.treCodigo}"/>
+                    <h:outputText value="#{tipRespController.findObj(item.treCodigo).treDescri}"/>
                 </p:column>
 
 

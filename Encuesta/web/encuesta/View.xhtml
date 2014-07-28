@@ -22,7 +22,7 @@
                         <h:outputText value="#{encuestaController.selected.encDescri}" title="#{appBundle.ViewEncuestaTitle_encDescri}"/>
 
                         <h:outputText value="#{appBundle.ViewEncuestaLabel_encEstado}"/>
-                        <h:outputText value="#{encuestaController.selected.encEstado}" title="#{appBundle.ViewEncuestaTitle_encEstado}"/>
+                        <h:outputText value="#{(encuestaController.selected.encEstado == 'A' ? 'ACTIVO' : 'PASIVO')}" title="#{appBundle.ViewEncuestaTitle_encEstado}"/>
 
                         <h:outputText value="#{appBundle.ViewEncuestaLabel_encFechini}"/>
                         <h:outputText value="#{encuestaController.selected.encFechini}" title="#{appBundle.ViewEncuestaTitle_encFechini}">
@@ -34,8 +34,6 @@
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:outputText>
 
-                        <h:outputText value="#{appBundle.ViewEncuestaLabel_encFiltXSrv}"/>
-                        <h:outputText value="#{encuestaController.selected.encFiltXSrv}" title="#{appBundle.ViewEncuestaTitle_encFiltXSrv}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{appBundle.Close}" onclick="EncuestaViewDialog.hide()"/>
                 </h:panelGroup>

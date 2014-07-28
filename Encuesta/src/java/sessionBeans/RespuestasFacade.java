@@ -7,6 +7,7 @@
 package sessionBeans;
 
 import entidades.Respuestas;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,8 +31,8 @@ public class RespuestasFacade extends AbstractFacade<Respuestas> {
         super(Respuestas.class);
     }
     
-    public List<Respuestas> getItemsRespuestas(Long usrId){
-        List<Respuestas> itemsResp = em.createQuery("SELECT r FROM Respuestas r WHERE r.usrId = :usrId").setParameter("usrId", usrId).getResultList();
+    public List<Respuestas> getItemsRespuestas(Long eusCodigo){
+        List<Respuestas> itemsResp = em.createQuery("SELECT r FROM Respuestas r WHERE r.eusCodigo = :eusCodigo").setParameter("eusCodigo", eusCodigo).getResultList();
         return itemsResp;
     }
     

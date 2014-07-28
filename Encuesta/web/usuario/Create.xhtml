@@ -15,11 +15,15 @@
                 <h:panelGroup id="display" rendered="#{usuarioController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
 
-                        <p:outputLabel value="#{appBundle.CreateUsuarioLabel_depId}" for="depId" />
-                        <p:inputText id="depId" value="#{usuarioController.selected.depId}" title="#{appBundle.CreateUsuarioTitle_depId}"/>
-
                         <p:outputLabel value="#{appBundle.CreateUsuarioLabel_repaCodigo}" for="repaCodigo" />
-                        <p:inputText id="repaCodigo" value="#{usuarioController.selected.repaCodigo}" title="#{appBundle.CreateUsuarioTitle_repaCodigo}" size="6" maxlength="6"/>
+                        <p:selectOneMenu id="repaCodigo" value="#{usuarioController.selected.repaCodigo}">
+                            <f:selectItems value="#{repartoController.items}" var="itemR" itemValue="#{itemR.repaCodigo2}" itemLabel="#{itemR.repaDenominacion}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{appBundle.CreateUsuarioLabel_depId}" for="depId" />
+                        <p:selectOneMenu id="depId" value="#{usuarioController.selected.depId}">
+                            <f:selectItems id="sel3" value="#{departamentoController.items}" var="itemDep" itemValue="#{itemDep.depId}" itemLabel="#{itemDep.depDenominacion}"/>  
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{appBundle.CreateUsuarioLabel_usrCi}" for="usrCi" />
                         <p:inputText id="usrCi" value="#{usuarioController.selected.usrCi}" title="#{appBundle.CreateUsuarioTitle_usrCi}" size="10" maxlength="10"/>
@@ -43,7 +47,10 @@
                         <p:inputText id="usrClave" value="#{usuarioController.selected.usrClave}" title="#{appBundle.CreateUsuarioTitle_usrClave}" size="30" maxlength="30"/>
 
                         <p:outputLabel value="#{appBundle.CreateUsuarioLabel_usrTipo}" for="usrTipo" />
-                        <p:inputText id="usrTipo" value="#{usuarioController.selected.usrTipo}" title="#{appBundle.CreateUsuarioTitle_usrTipo}"/>
+                        <p:selectOneMenu id="usrTipo" value="#{usuarioController.selected.usrTipo}">
+                            <f:selectItem itemValue="" itemLabel="NORMAL"/>
+                            <f:selectItem itemValue="A" itemLabel="ADMINISTRADOR"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuarioController.saveNew}" value="#{appBundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,UsuarioCreateDialog);">
                         <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>

@@ -11,17 +11,20 @@
             <p:menubar>
                 <p:menuitem value="#{appBundle.Home}" outcome="/index" icon="ui-icon-home"/>
                 <p:submenu label="#{appBundle.Maintenance}">
-                    <p:menuitem value="#{appBundle.DepServHeading}..." outcome="/depServ/index" />
-                    <p:menuitem value="#{appBundle.DepartamentoHeading}..." outcome="/departamento/index" />
-                    <p:menuitem value="#{appBundle.EncuestaHeading}..." outcome="/encuesta/index" />
-                    <p:menuitem value="#{appBundle.OpcRespHeading}..." outcome="/opcResp/index" />
-                    <p:menuitem value="#{appBundle.PreguntaHeading}..." outcome="/pregunta/index" />
+                    <p:menuitem value="---------------------------------"/> 
                     <p:menuitem value="#{appBundle.RepartoHeading}..." outcome="/reparto/index" />
-                    <p:menuitem value="#{appBundle.RespuestasHeading}..." outcome="/respuestas/index" />
-                    <p:menuitem value="#{appBundle.ServicioHeading}..." outcome="/servicio/index" />
+                    <p:menuitem value="#{appBundle.DepartamentoHeading}..." outcome="/departamento/index" />
+                    <p:menuitem value="#{appBundle.ServicioHeading}..." outcome="/servicio/index" />                    
+                    <p:menuitem value="#{appBundle.DepServHeading}..." outcome="/depServ/index" />  
+                    <p:menuitem value="---------------------------------"/> 
                     <p:menuitem value="#{appBundle.TipRespHeading}..." outcome="/tipResp/index" />
+                    <p:menuitem value="#{appBundle.OpcRespHeading}..." outcome="/opcResp/index" />
+                    <p:menuitem value="---------------------------------"/>
+                    <p:menuitem value="#{appBundle.EncuestaHeading}..." outcome="/encuesta/index" />                    
+                    <p:menuitem value="#{appBundle.PreguntaHeading}..." outcome="/pregunta/index" />                  
+                    <p:menuitem value="---------------------------------"/>             
                     <p:menuitem value="#{appBundle.UsuarioHeading}..." outcome="/usuario/index" />
-                    <p:menuitem value="Seleccionar Servicio..." outcome="/servicio/selectServ" />
+                    <p:menuitem value="---------------------------------"/> 
                 </p:submenu>
             </p:menubar>
         </h:form>

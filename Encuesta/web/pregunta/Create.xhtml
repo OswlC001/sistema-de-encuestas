@@ -16,13 +16,19 @@
                     <p:panelGrid columns="2" columnClasses="column">
 
                         <p:outputLabel value="#{appBundle.CreatePreguntaLabel_treCodigo}" for="treCodigo" />
-                        <p:inputText id="treCodigo" value="#{preguntaController.selected.treCodigo}" title="#{appBundle.CreatePreguntaTitle_treCodigo}"/>
+                        <p:selectOneMenu id="treCodigo" value="#{preguntaController.selected.treCodigo}">
+                            <f:selectItems value="#{tipRespController.items}" var="itemTRes" itemValue="#{itemTRes.treCodigo}" itemLabel="#{itemTRes.treDescri}"/>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{appBundle.CreatePreguntaLabel_servId}" for="servId" />
-                        <p:inputText id="servId" value="#{preguntaController.selected.servId}" title="#{appBundle.CreatePreguntaTitle_servId}"/>
+                        <p:selectOneMenu id="servId" value="#{preguntaController.selected.servId}">
+                            <f:selectItems value="#{servicioController.items}" var="itemServ" itemValue="#{itemServ.servId}" itemLabel="#{itemServ.servDeno}"/>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{appBundle.CreatePreguntaLabel_encCodigo}" for="encCodigo" />
-                        <p:inputText id="encCodigo" value="#{preguntaController.selected.encCodigo}" title="#{appBundle.CreatePreguntaTitle_encCodigo}"/>
+                        <p:selectOneMenu id="encCodigo" value="#{preguntaController.selected.encCodigo}">
+                            <f:selectItems value="#{encuestaController.items}" var="itemEnc" itemValue="#{itemEnc.encCodigo}" itemLabel="#{itemEnc.encDescri}"/>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{appBundle.CreatePreguntaLabel_prePregunta}" for="prePregunta" />
                         <p:inputTextarea rows="4" cols="30" id="prePregunta" value="#{preguntaController.selected.prePregunta}" title="#{appBundle.CreatePreguntaTitle_prePregunta}" />

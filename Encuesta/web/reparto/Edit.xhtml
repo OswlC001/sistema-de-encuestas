@@ -19,7 +19,9 @@
                         <h:outputText id="repaCodigo2" value="#{repartoController.selected.repaCodigo2}" />
 
                         <p:outputLabel value="#{appBundle.EditRepartoLabel_repRepaCodigo2}" for="repRepaCodigo2" />
-                        <p:inputText id="repRepaCodigo2" value="#{repartoController.selected.repRepaCodigo2}" title="#{appBundle.EditRepartoTitle_repRepaCodigo2}" size="6" maxlength="6"/>
+                        <p:selectOneMenu id="repRepaCodigo2" value="#{repartoController.selected.repRepaCodigo2}">
+                            <f:selectItems value="#{repartoController.items}" var="itemRep" itemValue="#{itemRep.repaCodigo2}" itemLabel="#{itemRep.repaDenominacion}"/>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{appBundle.EditRepartoLabel_repaDenominacion}" for="repaDenominacion" />
                         <p:inputText id="repaDenominacion" value="#{repartoController.selected.repaDenominacion}" title="#{appBundle.EditRepartoTitle_repaDenominacion}" size="50" maxlength="50"/>

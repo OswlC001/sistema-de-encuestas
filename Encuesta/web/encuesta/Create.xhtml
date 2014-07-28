@@ -19,16 +19,18 @@
                         <p:inputText id="encDescri" value="#{encuestaController.selected.encDescri}" title="#{appBundle.CreateEncuestaTitle_encDescri}" size="200" maxlength="200"/>
 
                         <p:outputLabel value="#{appBundle.CreateEncuestaLabel_encEstado}" for="encEstado" />
-                        <p:inputText id="encEstado" value="#{encuestaController.selected.encEstado}" title="#{appBundle.CreateEncuestaTitle_encEstado}"/>
-
+                        <p:selectOneMenu id="encEstado" value="#{encuestaController.selected.encEstado}">
+                            <f:selectItem itemLabel="ACTIVO" itemValue="A"/>
+                            <f:selectItem itemLabel="PASIVO" itemValue="P"/>
+                        </p:selectOneMenu>
+                      
+                        
                         <p:outputLabel value="#{appBundle.CreateEncuestaLabel_encFechini}" for="encFechini" />
                         <p:calendar id="encFechini" pattern="MM/dd/yyyy HH:mm:ss" value="#{encuestaController.selected.encFechini}" title="#{appBundle.CreateEncuestaTitle_encFechini}"  showOn="button"/>
 
                         <p:outputLabel value="#{appBundle.CreateEncuestaLabel_encFecfin}" for="encFecfin" />
                         <p:calendar id="encFecfin" pattern="MM/dd/yyyy HH:mm:ss" value="#{encuestaController.selected.encFecfin}" title="#{appBundle.CreateEncuestaTitle_encFecfin}"  showOn="button"/>
 
-                        <p:outputLabel value="#{appBundle.CreateEncuestaLabel_encFiltXSrv}" for="encFiltXSrv" />
-                        <p:inputText id="encFiltXSrv" value="#{encuestaController.selected.encFiltXSrv}" title="#{appBundle.CreateEncuestaTitle_encFiltXSrv}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{encuestaController.saveNew}" value="#{appBundle.Save}" update="display,:EncuestaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,EncuestaCreateDialog);">
                         <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>

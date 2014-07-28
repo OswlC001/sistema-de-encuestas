@@ -14,15 +14,14 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{encuestaController.selected != null}">
 
-
-                        <h:outputLabel value="#{appBundle.EditEncuestaLabel_encCodigo}" for="encCodigo" />
-                        <h:outputText id="encCodigo" value="#{encuestaController.selected.encCodigo}" />
-
                         <p:outputLabel value="#{appBundle.EditEncuestaLabel_encDescri}" for="encDescri" />
                         <p:inputText id="encDescri" value="#{encuestaController.selected.encDescri}" title="#{appBundle.EditEncuestaTitle_encDescri}" size="200" maxlength="200"/>
 
                         <p:outputLabel value="#{appBundle.EditEncuestaLabel_encEstado}" for="encEstado" />
-                        <p:inputText id="encEstado" value="#{encuestaController.selected.encEstado}" title="#{appBundle.EditEncuestaTitle_encEstado}"/>
+                        <p:selectOneMenu id="encEstado" value="#{encuestaController.selected.encEstado}">
+                            <f:selectItem itemLabel="ACTIVO" itemValue="A"/>
+                            <f:selectItem itemLabel="PASIVO" itemValue="P"/>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{appBundle.EditEncuestaLabel_encFechini}" for="encFechini" />
                         <p:calendar id="encFechini" pattern="MM/dd/yyyy HH:mm:ss" value="#{encuestaController.selected.encFechini}" title="#{appBundle.EditEncuestaTitle_encFechini}"  showOn="button"/>
@@ -30,8 +29,6 @@
                         <p:outputLabel value="#{appBundle.EditEncuestaLabel_encFecfin}" for="encFecfin" />
                         <p:calendar id="encFecfin" pattern="MM/dd/yyyy HH:mm:ss" value="#{encuestaController.selected.encFecfin}" title="#{appBundle.EditEncuestaTitle_encFecfin}"  showOn="button"/>
 
-                        <p:outputLabel value="#{appBundle.EditEncuestaLabel_encFiltXSrv}" for="encFiltXSrv" />
-                        <p:inputText id="encFiltXSrv" value="#{encuestaController.selected.encFiltXSrv}" title="#{appBundle.EditEncuestaTitle_encFiltXSrv}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{encuestaController.save}" value="#{appBundle.Save}" update="display,:EncuestaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,EncuestaEditDialog);">
                         <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>

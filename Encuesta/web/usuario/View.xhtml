@@ -18,12 +18,15 @@
                         <h:outputText value="#{appBundle.ViewUsuarioLabel_usrId}"/>
                         <h:outputText value="#{usuarioController.selected.usrId}" title="#{appBundle.ViewUsuarioTitle_usrId}"/>
 
-                        <h:outputText value="#{appBundle.ViewUsuarioLabel_depId}"/>
-                        <h:outputText value="#{usuarioController.selected.depId}" title="#{appBundle.ViewUsuarioTitle_depId}"/>
+                        <p:outputLabel value="#{appBundle.CreateUsuarioLabel_repaCodigo}" for="repaCodigo" />
+                        <p:selectOneMenu id="repaCodigo" value="#{usuarioController.selected.repaCodigo}" disabled="true">
+                            <f:selectItems value="#{repartoController.items}" var="itemR" itemValue="#{itemR.repaCodigo2}" itemLabel="#{itemR.repaDenominacion}"/>
+                        </p:selectOneMenu>
 
-                        <h:outputText value="#{appBundle.ViewUsuarioLabel_repaCodigo}"/>
-                        <h:outputText value="#{usuarioController.selected.repaCodigo}" title="#{appBundle.ViewUsuarioTitle_repaCodigo}"/>
-
+                        <p:outputLabel value="#{appBundle.CreateUsuarioLabel_depId}" for="depId"/>
+                        <p:selectOneMenu id="depId" value="#{usuarioController.selected.depId}" disabled="true">
+                            <f:selectItems id="sel3" value="#{departamentoController.items}" var="itemDep" itemValue="#{itemDep.depId}" itemLabel="#{itemDep.depDenominacion}"/>  
+                        </p:selectOneMenu>
                         <h:outputText value="#{appBundle.ViewUsuarioLabel_usrCi}"/>
                         <h:outputText value="#{usuarioController.selected.usrCi}" title="#{appBundle.ViewUsuarioTitle_usrCi}"/>
 
@@ -46,7 +49,7 @@
                         <h:outputText value="#{usuarioController.selected.usrClave}" title="#{appBundle.ViewUsuarioTitle_usrClave}"/>
 
                         <h:outputText value="#{appBundle.ViewUsuarioLabel_usrTipo}"/>
-                        <h:outputText value="#{usuarioController.selected.usrTipo}" title="#{appBundle.ViewUsuarioTitle_usrTipo}"/>
+                        <h:outputText value="#{(usuarioController.selected.usrTipo=='A' ? 'ADMININSTRADOR' : 'NORMAL')}" title="#{appBundle.ViewUsuarioTitle_usrTipo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{appBundle.Close}" onclick="UsuarioViewDialog.hide()"/>
                 </h:panelGroup>

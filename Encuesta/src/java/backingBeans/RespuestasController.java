@@ -116,4 +116,15 @@ public class RespuestasController extends AbstractController<Respuestas> {
             respuestasFacade.edit(resp);
         }
     }
+    
+    public void cambioRespuestaLibre(ValueChangeEvent event) {
+        if (event != null) {
+            String value = (String) event.getNewValue();
+            Respuestas resp = (Respuestas) ((UIInput) event.getSource()).getAttributes().get("respuesta");
+            resp.setResResplibre(value);
+            respuestasFacade.edit(resp);
+        }
+    }
+    
+    
 }

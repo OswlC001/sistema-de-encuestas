@@ -29,6 +29,11 @@
                                     <f:attribute name="respuesta" value="#{item}"/>
                                 </p:selectOneRadio>
                             </p>
+                            <p>
+                                <p:inputTextarea id="textoArea" value="#{item.resResplibre}" rendered="#{preguntaController.findObj(item.preCodigo).preLibre}" valueChangeListener="#{respuestasController.cambioRespuestaLibre}" cols="150" >
+                                    <f:attribute name="respuesta" value="#{item}"/>
+                                </p:inputTextarea>
+                            </p>
                         </p:column>
                     </p:dataTable>
                     <p><p:commandButton id="btnFin" action="#{respuestasController.finalizarEncuesta}" value="Finalizar Encuesta" update="EncuestaForm"/></p>

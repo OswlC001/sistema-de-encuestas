@@ -19,6 +19,7 @@ import sessionBeans.RespuestasFacade;
 @Named(value = "respuestasController")
 @ViewScoped
 public class RespuestasController extends AbstractController<Respuestas> {
+    
     @EJB
     private EncUsuarioFacade encUsuarioFacade;
 
@@ -26,9 +27,8 @@ public class RespuestasController extends AbstractController<Respuestas> {
     private RespuestasFacade respuestasFacade;
 
     @EJB
-    private PreguntaFacade preguntaFacade;
+    private PreguntaFacade preguntaFacade;     
     
-
     List<String> selectedServ;
     List<Respuestas> itemsRespuesta;
     Date fecha = new Date();
@@ -78,11 +78,15 @@ public class RespuestasController extends AbstractController<Respuestas> {
 
     public String continuarEncuesta() {
         Long servId;
-        Long encUs;
-        encUs = (long) 1;
+        Long usuario;  
+        Long encuesta;
+        usuario = (Long) session.getAttribute("usIdE");
+        //Esto debe cambiar cuando haya un tipo diferente de encuesta
+        //Faltante
+        encuesta = (long) 1;
         EncUsuario encUsuario = new EncUsuario();
-        encUsuario.setEncCodigo(encUs);
-        encUsuario.setUsrId(encUs);
+        encUsuario.setEncCodigo(encuesta);
+        encUsuario.setUsrId(usuario);
         encUsuario.setEusFecha(fecha);
         encUsuarioFacade.create(encUsuario);
         for (String serv : selectedServ) {

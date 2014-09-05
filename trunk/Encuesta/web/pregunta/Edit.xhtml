@@ -32,6 +32,12 @@
 
                         <p:outputLabel value="#{appBundle.EditPreguntaLabel_prePregunta}" for="prePregunta" />
                         <p:inputTextarea rows="4" cols="30" id="prePregunta" value="#{preguntaController.selected.prePregunta}" title="#{appBundle.EditPreguntaTitle_prePregunta}" />
+                  
+                         <p:outputLabel value="Pregunta Libre" for="preLibre" />
+                         <p:selectBooleanCheckbox id="preLibre" value="#{preguntaController.selected.preLibre}" />
+
+                        <p:outputLabel value="Pregunta Obligatoria" for="preOblig" />
+                        <p:selectBooleanCheckbox id="preOblig" value="#{preguntaController.selected.preOblig}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{preguntaController.save}" value="#{appBundle.Save}" update="display,:PreguntaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PreguntaEditDialog);">
                         <p:confirm header="#{appBundle.ConfirmationHeader}" message="#{appBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>

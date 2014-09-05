@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sessionBeans;
 
 import entidades.Usuario;
@@ -19,6 +18,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
+
     @PersistenceContext(unitName = "EncuestaPU")
     private EntityManager em;
 
@@ -30,11 +30,17 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
-     public boolean isLoginValido(String usuario, String password) {
+
+    public boolean isLoginValido(String usuario, String password) {
         Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.usrCi = '" + usuario + "' and u.usrClave = '" + password + "'");
-        List l = q.getResultList();       
+        List l = q.getResultList();
         return !l.isEmpty();
     }
-    
+
+    public Usuario usuarioXCedula(String usuario) {
+        Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.usrCi = '" + usuario + "'");
+        Usuario u = (Usuario) q.getSingleResult();
+        return u;
+    }
+
 }

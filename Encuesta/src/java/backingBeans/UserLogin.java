@@ -1,11 +1,11 @@
 package backingBeans;
 
+import entidades.Usuario;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
 import sessionBeans.UsuarioFacade;
 
 @ManagedBean
@@ -58,6 +58,11 @@ public class UserLogin {
         if (username != null && password != null && usuarioFacade.isLoginValido(username, password)) {
             loggedIn = true;            
             //dir="/index";
+            Usuario usuario = usuarioFacade.usuarioXCedula(username);
+            if (usuario!=null){
+                Long usIdE = usuario.getUsrId();
+                session.setAttribute("usIdE", usIdE);
+            }
             dir="/servicio/selectServ";
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", username);
         } else {

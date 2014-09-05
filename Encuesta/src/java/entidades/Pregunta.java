@@ -47,14 +47,34 @@ public class Pregunta implements Serializable {
     @Size(max = 400)
     @Column(name = "PRE_PREGUNTA")
     private String prePregunta;
+    @Column(name = "PRE_LIBRE")
+    private Boolean preLibre;
+    @Column(name = "PRE_OBLIG")
+    private Boolean preOblig;
 
     public Pregunta() {
     }
-
+    
     public Pregunta(Long preCodigo) {
         this.preCodigo = preCodigo;
     }
 
+    public Boolean getPreLibre() {
+        return preLibre;
+    }
+
+    public void setPreLibre(Boolean preLibre) {
+        this.preLibre = preLibre;
+    }
+
+    public Boolean getPreOblig() {
+        return preOblig;
+    }
+
+    public void setPreOblig(Boolean preOblig) {
+        this.preOblig = preOblig;
+    }  
+    
     public Long getPreCodigo() {
         return preCodigo;
     }

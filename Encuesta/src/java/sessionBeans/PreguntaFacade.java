@@ -30,8 +30,14 @@ public class PreguntaFacade extends AbstractFacade<Pregunta> {
         super(Pregunta.class);
     }
 
-    public List<Pregunta> getPreguntas(Long servId) {
-        List<Pregunta> preguntas = em.createQuery("SELECT p FROM Pregunta p WHERE p.servId = :servId or p.preOblig = :preOblig").setParameter("servId", servId).setParameter("preOblig", true).getResultList();
+    public List<Pregunta> getPreguntas(Long servId, Boolean preOblig) {
+        List<Pregunta> preguntas;
+        if (preOblig) {
+            preguntas = em.createQuery("SELECT p FROM Pregunta p WHERE p.preOblig = :preOblig").setParameter("preOblig", preOblig).getResultList();
+        } else {
+            preguntas = em.createQuery("SELECT p FROM Pregunta p WHERE p.servId = :servId and p.preOblig = :preOblig").setParameter("servId", servId).setParameter("preOblig", preOblig).getResultList();
+        }
+
         return preguntas;
     }
 

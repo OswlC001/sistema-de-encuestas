@@ -19,7 +19,7 @@ import sessionBeans.RespuestasFacade;
 @Named(value = "respuestasController")
 @ViewScoped
 public class RespuestasController extends AbstractController<Respuestas> {
-    
+
     @EJB
     private EncUsuarioFacade encUsuarioFacade;
 
@@ -27,8 +27,8 @@ public class RespuestasController extends AbstractController<Respuestas> {
     private RespuestasFacade respuestasFacade;
 
     @EJB
-    private PreguntaFacade preguntaFacade;     
-    
+    private PreguntaFacade preguntaFacade;
+
     List<String> selectedServ;
     List<Respuestas> itemsRespuesta;
     Date fecha = new Date();
@@ -37,7 +37,7 @@ public class RespuestasController extends AbstractController<Respuestas> {
 
     public RespuestasController() {
         // Inform the Abstract parent controller of the concrete Respuestas?cap_first Entity
-        super(Respuestas.class);        
+        super(Respuestas.class);
     }
 
     public List<Respuestas> getItemsRespuesta() {
@@ -48,8 +48,8 @@ public class RespuestasController extends AbstractController<Respuestas> {
 
     public void setItemsRespuesta(List<Respuestas> itemsRespuesta) {
         this.itemsRespuesta = itemsRespuesta;
-    }    
-    
+    }
+
     public String pregunta(Long codigo) {
         Pregunta pregObj = preguntaFacade.find(codigo);
         if (pregObj != null) {
@@ -78,7 +78,7 @@ public class RespuestasController extends AbstractController<Respuestas> {
 
     public String continuarEncuesta() {
         Long servId;
-        Long usuario;  
+        Long usuario;
         Long encuesta;
         usuario = (Long) session.getAttribute("usIdE");
         //Esto debe cambiar cuando haya un tipo diferente de encuesta
@@ -91,14 +91,23 @@ public class RespuestasController extends AbstractController<Respuestas> {
         encUsuarioFacade.create(encUsuario);
         for (String serv : selectedServ) {
             servId = Long.parseLong(serv);
-            List<Pregunta> preguntas = preguntaFacade.getPreguntas(servId);
-            for (Pregunta pregunta : preguntas) { 
+            List<Pregunta> preguntas = preguntaFacade.getPreguntas(servId, false);
+            for (Pregunta pregunta : preguntas) {
                 Respuestas resuesta = new Respuestas();
                 resuesta.setPreCodigo(pregunta.getPreCodigo());
-                resuesta.setEusCodigo(encUsuario.getEusCodigo());                
+                resuesta.setEusCodigo(encUsuario.getEusCodigo());
                 respuestasFacade.create(resuesta);
             }
         }
+
+        List<Pregunta> preguntas = preguntaFacade.getPreguntas(null, true);
+        for (Pregunta pregunta : preguntas) {
+            Respuestas resuesta = new Respuestas();
+            resuesta.setPreCodigo(pregunta.getPreCodigo());
+            resuesta.setEusCodigo(encUsuario.getEusCodigo());
+            respuestasFacade.create(resuesta);
+        }
+
         encUsu = encUsuario.getEusCodigo();
         session.setAttribute("encUsu", encUsu);
         return "/respuestas/Encuesta";
@@ -116,7 +125,7 @@ public class RespuestasController extends AbstractController<Respuestas> {
             respuestasFacade.edit(resp);
         }
     }
-    
+
     public void cambioRespuestaLibre(ValueChangeEvent event) {
         if (event != null) {
             String value = (String) event.getNewValue();
@@ -125,6 +134,5 @@ public class RespuestasController extends AbstractController<Respuestas> {
             respuestasFacade.edit(resp);
         }
     }
-    
-    
+
 }

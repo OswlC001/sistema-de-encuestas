@@ -20,7 +20,6 @@ public class UserLogin {
     private String password;
     private boolean loggedInSession = false;
 
-   
     public boolean isLoggedInSession() {
         if (session.getAttribute("loggedIn") == null) {
             loggedInSession = false;
@@ -53,17 +52,23 @@ public class UserLogin {
     public String login() {
         FacesMessage message;
         Boolean loggedIn = false;
-        String dir="";
+        String dir = "";
 
         if (username != null && password != null && usuarioFacade.isLoginValido(username, password)) {
-            loggedIn = true;            
+            loggedIn = true;
             //dir="/index";
             Usuario usuario = usuarioFacade.usuarioXCedula(username);
-            if (usuario!=null){
+            dir = "/servicio/selectServ";
+            if (usuario != null) {
                 Long usIdE = usuario.getUsrId();
+                char usrTipo = 'N';
+                if (usuario.getUsrTipo() != null) {
+                    usrTipo = usuario.getUsrTipo();
+                    dir = "/servicio/selectServAdm";
+                }
                 session.setAttribute("usIdE", usIdE);
+                session.setAttribute("usrTipo", usrTipo);
             }
-            dir="/servicio/selectServ";
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", username);
         } else {
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Usuario/Password Incorrecto");
